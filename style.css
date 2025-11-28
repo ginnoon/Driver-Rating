@@ -1,0 +1,154 @@
+@font-face {
+  font-family: 'OPTIEdgarBold-Extended';
+  src: url('asset/OPTIEdgarBold-Extended.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+:after,
+:before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+  background: unset;
+  color: unset;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: url(asset/image-mesh-gradient.png);
+  background-size: cover;
+  color: #c3c3c3;
+  display: flex;
+  justify-content: center;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: -1;
+}
+
+.main {
+  max-width: 980px;
+  background: url(asset/image-mesh-gradient.png);
+  background-size: cover;
+  padding: 1rem;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10rem -2.5rem #c3c3c3;
+}
+
+h1 {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4rem;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.driver {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  width: 8rem;
+  overflow: hidden;
+  background-color: #20202080;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4rem), calc(100% - 4rem) 100%, 0 100%);
+  transition: transform 100ms ease-out;
+  cursor: pointer;
+}
+
+.table .driver:hover {
+  transform: scale(1.1);
+}
+
+.driver svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+
+.driver img {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  mask: linear-gradient(180deg, white 80%, transparent 100%);
+  object-fit: cover;
+  display: block;
+}
+
+.driver p {
+  padding: 0 .5rem;
+  font-family: 'OPTIEdgarBold-Extended', sans-serif;
+  font-weight: 900;
+  font-size: .85rem;
+  line-height: 1;
+}
+
+.driver p.long {
+  font-size: .65rem;
+}
+
+.driver h1 {
+  padding: 0 .5rem;
+  line-height: .8;
+  position: absolute;
+  bottom: .5rem;
+  letter-spacing: -.4rem;
+}
+
+.driver h1.long {
+  letter-spacing: -.8rem;
+}
+
+.driver svg {
+  pointer-events: none;
+}
+
+.detail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.detail::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1000%;
+  background-color: rgba(0, 0, 0, 0.75); 
+}
+
+.detail .driver {
+  transform: scale(2);
+  pointer-events: none;
+}
