@@ -25,15 +25,15 @@ window.onload = () => {
     driver.classList.add('driver');
     var s = data[key]['score'];
     var color =  s >= 90 ? '#ff8000' : s >= 80 ? '#ff00ff': s >= 70 ? '#ff0000' : s >= 60 ? 'url(#linearColors)' : s >= 50 ? '#ffc000' : s >= 40 ? '#0080ff' : '#c0c0c0';
-    driver.innerHTML = `<img src="https://avatar-cyan.vercel.app/api/pfp/${data[key]['id']}/image?size=256&format=webp"><p>${key.toUpperCase()}</p><h1>${data[key]['score']}</h1><svg viewBox="0 0 18 24"><polygon points="0,0 18,0 18,15 9,24 0,24" fill="transparent" stroke="${color}" stroke-width="8" vector-effect="non-scaling-stroke"></polygon></svg>`
+    let url = `https://avatar-cyan.vercel.app/api/pfp/${data[key]['id']}/image?size=256&format=webp`;
+    try {
+      url = new URL(data[key]['id']);
+      driver.querySelector('img').src = url.href;
+    } catch {}
+    driver.innerHTML = `<img src="${url}"><p>${key.toUpperCase()}</p><h1>${data[key]['score']}</h1><svg viewBox="0 0 18 24"><polygon points="0,0 18,0 18,15 9,24 0,24" fill="transparent" stroke="${color}" stroke-width="8" vector-effect="non-scaling-stroke"></polygon></svg>`
     if (key.length > 7) driver.querySelector('p').classList.add('long');
     if (data[key]['score'].toString().length > 2) driver.querySelector('h1').classList.add('long');
 
-    try {
-      var url = new URL(data[key]['id']);
-      driver.querySelector('img').src = url.href;
-    } catch {}
-    
     table.appendChild(driver);
   }
 
