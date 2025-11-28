@@ -10,7 +10,7 @@ data['Kws_Gbb'] = { id: '1179420028517499002', score: 61 };
 data['PIXMIN'] = { id: '965252483855310868', score: 48 };
 data['KOREA MONSTER'] = { id: '1127095415985160245', score: 60 };
 data['JONG WON KIM'] = { id: '985443382300123147', score: 38 };
-data['(censored)'] = { id: '1285606809297752147', score: 43 };
+data['NOALA'] = { id: '1285606809297752147', score: 43 };
 data['i merry'] = { id: '927177144868700200', score: 59 };
 // data['max verstappen'] = { id: 'https://i.pinimg.com/736x/29/a7/97/29a797972ea730a4ff4b26855e6afa3f.jpg', score: 100 };
 
