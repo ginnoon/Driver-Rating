@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>서버 상태 모니터링</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background-color: #f4f4f9;
+    }
+
+    #status {
+      font-size: 1.5rem;
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    .offline {
+      background-color: #ffebee;
+      color: #c62828;
+      border: 2px solid #ef9a9a;
+    }
+
+    .online {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      border: 2px solid #a5d6a7;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+      background-color: #2196F3;
+      color: white;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .info {
+      color: #666;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>서버 모니터링</h1>
+  <p class="info">대상: <code>http://1.255.161.15:8081/INFO</code> (10초 주기)</p>
+
+  <div id="status" class="offline">상태: 대기 중 (시작 버튼을 클릭하세요)</div>
+  <button id="startBtn">모니터링 시작</button>
+
+  <audio id="alarmAudio" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
+
+  <script>
+    const statusDiv = document.getElementById('status');
+    const startBtn = document.getElementById('startBtn');
+    const alarmAudio = document.getElementById('alarmAudio');
+    const targetUrl = 'http://1.255.161.15:8081/INFO';
+
+    let isRunning = false;
+    let alreadyNotified = false; // 소리가 이미 울렸는지 체크하는 변수
+
+    async function checkServer() {
+      try {
+        // fetch 시도
+        const response = await fetch(targetUrl, { mode: 'no-cors' });
+
+        // [서버 연결 성공 시]
+        statusDiv.innerText = "상태: 서버가 열려 있습니다! ✅";
+        statusDiv.className = "online";
+
+        // 처음 연결된 경우에만 소리 재생
+        if (!alreadyNotified) {
+          playAlarm();
+          alreadyNotified = true; // 이후에는 울리지 않도록 설정
+          console.log("서버 감지: 첫 알람을 재생했습니다.");
+        }
+      } catch (error) {
+        // [서버 연결 실패 시]
+        statusDiv.innerText = "상태: 서버 연결 실패 (재시도 중...)";
+        statusDiv.className = "offline";
+        alreadyNotified = false; // 서버가 다시 닫히면, 다음에 열렸을 때 소리가 나도록 리셋
+        console.log("서버가 아직 닫혀 있습니다.");
+      }
+    }
+
+    function playAlarm() {
+      alarmAudio.play().catch(e => console.log("오디오 재생 차단됨:", e));
+    }
+
+    startBtn.addEventListener('click', () => {
+      if (isRunning) return;
+
+      isRunning = true;
+      startBtn.innerText = "실시간 모니터링 중...";
+      startBtn.disabled = true;
+
+      // 즉시 체크 후 10초마다 반복
+      checkServer();
+      setInterval(checkServer, 10000);
+    });
+  </script>
+</body>
+
+</html>
