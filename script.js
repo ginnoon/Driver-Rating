@@ -19,23 +19,69 @@ data = Object.fromEntries(Object.entries(data).sort((a, b) => {
 }));
 
 window.onload = () => {
-  let table = document.querySelector('.table');
-  for (const key in data) {
-    const driver = document.createElement('div');
-    driver.classList.add('driver');
-    var s = data[key]['score'];
-    var color =  s >= 90 ? '#ff8000' : s >= 80 ? '#ff00ff': s >= 70 ? '#ff0000' : s >= 60 ? 'url(#linearColors)' : s >= 50 ? '#ffc000' : s >= 40 ? '#0080ff' : '#c0c0c0';
-    let url = `https://avatar-cyan.vercel.app/api/pfp/${data[key]['id']}/image?size=256&format=webp`;
-    try {
-      url = new URL(data[key]['id']);
-      driver.querySelector('img').src = url.href;
-    } catch {}
-    driver.innerHTML = `<img src="${url}"><p>${key.toUpperCase()}</p><h1>${data[key]['score']}</h1><svg viewBox="0 0 18 24"><polygon points="0,0 18,0 18,15 9,24 0,24" fill="transparent" stroke="${color}" stroke-width="8" vector-effect="non-scaling-stroke"></polygon></svg>`
-    if (key.length > 7) driver.querySelector('p').classList.add('long');
-    if (data[key]['score'].toString().length > 2) driver.querySelector('h1').classList.add('long');
+  // let table = document.querySelector('.table');
+  // for (const key in data) {
+  //   const driver = document.createElement('div');
+  //   driver.classList.add('driver');
+  //   var s = data[key]['score'];
+  //   var color =  s >= 90 ? '#ff8000' : s >= 80 ? '#ff00ff': s >= 70 ? '#ff0000' : s >= 60 ? 'url(#linearColors)' : s >= 50 ? '#ffc000' : s >= 40 ? '#0080ff' : '#c0c0c0';
+  //   let url = `https://avatar-cyan.vercel.app/api/pfp/${data[key]['id']}/image?size=256&format=webp`;
+  //   try {
+  //     url = new URL(data[key]['id']);
+  //     driver.querySelector('img').src = url.href;
+  //   } catch {}
+  //   driver.innerHTML = `<img src="${url}"><p>${key.toUpperCase()}</p><h1>${data[key]['score']}</h1><svg viewBox="0 0 18 24"><polygon points="0,0 18,0 18,15 9,24 0,24" fill="transparent" stroke="${color}" stroke-width="8" vector-effect="non-scaling-stroke"></polygon></svg>`
+  //   if (key.length > 7) driver.querySelector('p').classList.add('long');
+  //   if (data[key]['score'].toString().length > 2) driver.querySelector('h1').classList.add('long');
 
-    table.appendChild(driver);
-  }
+  //   table.appendChild(driver);
+  // }
+for (const key in data) {
+  const driver = document.createElement('div');
+  driver.classList.add('driver');
+
+  const { id, score } = data[key];
+
+  fetch(`https://ginnoon-api.vercel.app/${id}`)
+    .then(res => res.json())
+    .then(user => {
+      const color =
+        score >= 90 ? '#ff8000' :
+        score >= 80 ? '#ff00ff' :
+        score >= 70 ? '#ff0000' :
+        score >= 60 ? 'url(#linearColors)' :
+        score >= 50 ? '#ffc000' :
+        score >= 40 ? '#0080ff' :
+        '#c0c0c0';
+
+      const avatarUrl = user.avatar
+        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=256`
+        : 'https://cdn.discordapp.com/embed/avatars/0.png';
+
+      driver.innerHTML = `
+        <img src="${avatarUrl}">
+        <p>${key.toUpperCase()}</p>
+        <h1>${score}</h1>
+        <svg viewBox="0 0 18 24">
+          <polygon points="0,0 18,0 18,15 9,24 0,24"
+            fill="transparent"
+            stroke="${color}"
+            stroke-width="8"
+            vector-effect="non-scaling-stroke">
+          </polygon>
+        </svg>
+      `;
+
+      if (key.length > 7)
+        driver.querySelector('p').classList.add('long');
+
+      if (score.toString().length > 2)
+        driver.querySelector('h1').classList.add('long');
+
+      table.appendChild(driver);
+    });
+}
+
 
   let popup = document.querySelector('.detail');
   function pop(event) {
