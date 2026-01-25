@@ -36,29 +36,31 @@ window.onload = () => {
 
   //   table.appendChild(driver);
   // }
-for (const key in data) {
-  const driver = document.createElement('div');
-  driver.classList.add('driver');
 
-  const { id, score } = data[key];
+  let table = document.querySelector('.table');
+  for (const key in data) {
+    const driver = document.createElement('div');
+    driver.classList.add('driver');
 
-  fetch(`https://ginnoon-api.vercel.app/${id}`)
-    .then(res => res.json())
-    .then(user => {
-      const color =
-        score >= 90 ? '#ff8000' :
-        score >= 80 ? '#ff00ff' :
-        score >= 70 ? '#ff0000' :
-        score >= 60 ? 'url(#linearColors)' :
-        score >= 50 ? '#ffc000' :
-        score >= 40 ? '#0080ff' :
-        '#c0c0c0';
+    const { id, score } = data[key];
 
-      const avatarUrl = user.avatar
-        ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=256`
-        : 'https://cdn.discordapp.com/embed/avatars/0.png';
+    fetch(`https://ginnoon-api.vercel.app/${id}`)
+      .then(res => res.json())
+      .then(user => {
+        const color =
+          score >= 90 ? '#ff8000' :
+            score >= 80 ? '#ff00ff' :
+              score >= 70 ? '#ff0000' :
+                score >= 60 ? 'url(#linearColors)' :
+                  score >= 50 ? '#ffc000' :
+                    score >= 40 ? '#0080ff' :
+                      '#c0c0c0';
 
-      driver.innerHTML = `
+        const avatarUrl = user.avatar
+          ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp?size=256`
+          : 'https://cdn.discordapp.com/embed/avatars/0.png';
+
+        driver.innerHTML = `
         <img src="${avatarUrl}">
         <p>${key.toUpperCase()}</p>
         <h1>${score}</h1>
@@ -72,15 +74,15 @@ for (const key in data) {
         </svg>
       `;
 
-      if (key.length > 7)
-        driver.querySelector('p').classList.add('long');
+        if (key.length > 7)
+          driver.querySelector('p').classList.add('long');
 
-      if (score.toString().length > 2)
-        driver.querySelector('h1').classList.add('long');
+        if (score.toString().length > 2)
+          driver.querySelector('h1').classList.add('long');
 
-      table.appendChild(driver);
-    });
-}
+        table.appendChild(driver);
+      });
+  }
 
 
   let popup = document.querySelector('.detail');
