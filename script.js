@@ -79,9 +79,8 @@ window.onload = () => {
 
         if (score.toString().length > 2)
           driver.querySelector('h1').classList.add('long');
-
-        table.appendChild(driver);
       });
+    table.appendChild(driver);
   }
 
 
