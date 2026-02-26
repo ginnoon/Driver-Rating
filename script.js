@@ -13,6 +13,7 @@ data['JONG WON KIM'] = { id: '985443382300123147', score: 39 };
 data['NOALA'] = { id: '1285606809297752147', score: 46 };
 data['i merry'] = { id: '927177144868700200', score: 67 };
 data['J_K'] = { id: '887277307469918228', score: 44 };
+data['seojing102'] = { id: '1294262735005028413', score: 44 };
 // data['max verstappen'] = { id: 'https://i.pinimg.com/736x/29/a7/97/29a797972ea730a4ff4b26855e6afa3f.jpg', score: 100 };
 
 data = Object.fromEntries(Object.entries(data).sort((a, b) => {
