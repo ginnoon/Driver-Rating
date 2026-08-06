@@ -1,5 +1,5 @@
 let data = {};
-data['koko'] = { id: '847840244279935017', score: 73 };
+data['koko'] = { id: '847840244279935017', score: 70 };
 data['ginnoon'] = { id: '1314490478154092571', score: 71 };
 data['sauber'] = { id: '759320895386550303', score: 68 };
 data['savant garde'] = { id: '814749670617120788', score: 65 };
