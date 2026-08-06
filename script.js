@@ -46,7 +46,7 @@ window.onload = () => {
 
     const { id, score } = data[key];
 
-    fetch(`https://ginnoon-api.vercel.app/${id}`)
+    fetch(`https://ginnoon-api.vercel.app/discord/${id}`)
       .then(res => res.json())
       .then(user => {
         const color =
