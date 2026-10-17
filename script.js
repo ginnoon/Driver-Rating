@@ -1,19 +1,19 @@
 let data = {};
-data['koko'] = { id: '847840244279935017', score: 70 };
-data['ginnoon'] = { id: '1314490478154092571', score: 71 };
+data['koko'] = { id: '847840244279935017', score: 71 };
+data['ginnoon'] = { id: '1314490478154092571', score: 70 };
 data['sauber'] = { id: '759320895386550303', score: 68 };
 data['savant garde'] = { id: '814749670617120788', score: 64 };
 // data['gun8'] = { id: '1180792260099588162', score: 62 };
-data['orca'] = { id: '1324747702399008863', score: 66 };
-data['kong'] = { id: '1099580264868479058', score: 67 };
-data['Kws_Gbb'] = { id: '1179420028517499002', score: 70 };
+data['orca'] = { id: '1324747702399008863', score: 64 };
+data['kong'] = { id: '1099580264868479058', score: 68 };
+data['Kws_Gbb'] = { id: '1179420028517499002', score: 69 };
 data['PIXMIN'] = { id: '965252483855310868', score: 52 };
 data['KOREA MONSTER'] = { id: '1127095415985160245', score: 61 };
 data['JONG WON KIM'] = { id: '985443382300123147', score: 39 };
-data['NOALA'] = { id: '1285606809297752147', score: 46 };
-data['i merry'] = { id: '927177144868700200', score: 68 };
+data['NOALA'] = { id: '1285606809297752147', score: 43 };
+data['i merry'] = { id: '927177144868700200', score: 70 };
 data['J_K'] = { id: '887277307469918228', score: 47 };
-data['seojing102'] = { id: '1294262735005028413', score: 44 };
+data['seojing102'] = { id: '1294262735005028413', score: 46 };
 // data['max verstappen'] = { id: 'https://i.pinimg.com/736x/29/a7/97/29a797972ea730a4ff4b26855e6afa3f.jpg', score: 100 };
 
 data = Object.fromEntries(Object.entries(data).sort((a, b) => {
